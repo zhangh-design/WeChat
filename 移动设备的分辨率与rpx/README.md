@@ -72,7 +72,7 @@ index.wxml
 
 ![image](http://m.qpic.cn/psc?/V12UXEll2JjLTU/S1G4*2hi*D5aPIJug2nMay*y27CPk3y5XXbsH0Eam1IKqfy.PeGkP11xpoFMPTOFrdP7V6H4Bus8i87O3gLaWAA8WIB6zdDyjW0xVV.enfY!/b&bo=9wG3AgAAAAARB3M!&rf=viewer_4&t=5)
 
-好像不太对是不是，这个图片只显示了一半对不对，它不是被压缩了啊很明显的是被截断了，然后高度是对的我们刚才说了高度不影响多高都可以它可以撑开，那这个问题是什么呢，我们看下`iphone6`这个模拟器上面宽度只有`375`（其实这里的375就是代表的逻辑分辨率pt），它只有`375`（这里要注意单位是pt）那怎么去显示`750px`呢，这个原因是什么呢？
+好像不太对是不是，这个图片只显示了一半对不对，它不是被压缩了啊很明显的是被截断了，然后高度是对的我们刚才说了高度不影响多高都可以它可以撑开，那这个问题是什么呢，我们看下`iphone6`这个模拟器上面宽度只有`375`（其实这里的375就是代表的逻辑分辨率pt，但是我们在网页上只能设置px，所以要把crab.jpg整张图显示出来就要设成width:375px，那如果设置为width:750px的话就刚好扩大了一倍），它只有`375`（这里要注意单位是pt）那怎么去显示`750px`呢，这个原因是什么呢？
 
 ![image](http://m.qpic.cn/psc?/V12UXEll2JjLTU/S1G4*2hi*D5aPIJug2nMaz.wC4Gn*HlxW8jO.IcQvuVVVJMpMnuFrvfHgw4r7cH0*rO8yID2mTRceQLdK6cFmGdMY0YzOtL70M.J7y79m7M!/b&bo=EQFTAQAAAAARB3I!&rf=viewer_4&t=5)
 
