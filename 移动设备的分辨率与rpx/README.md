@@ -19,7 +19,7 @@
 
 那么我们呢首先来看一张设计图（宽度是750像素，高度我们无所谓多高都可以）：
 
-![image](http://m.qpic.cn/psc?/V12UXEll2JjLTU/S1G4*2hi*D5aPIJug2nMa*VFpwWqwFuAXfZlstGK.6eBqgFUm3G15G6OoVDeuF7DT5SQQQUdCV4LqAFTMaQIELxDLWDlK3vRC9ty6bJu4Dk!/b&bo=NgM9AgAAAAARBzo!&rf=viewer_4&t=5)
+![image](http://i1.fuimg.com/717460/40ae5add37be9817.jpg)
 
 这是我们团队设计师设计的一个小程序的一个效果图啊，我们主要来看一下它的尺寸，我们关注一下它的宽度啊宽度是0到750像素，高的话呢这个不用管啊多高都可以，我相信呢绝大多数的这个团队的主流的这样一个效果图都是750像素的。
 
@@ -70,15 +70,15 @@ index.wxml
 
 好按道理来讲应该是这样的，然后我们看一下对不对啊：
 
-![image](http://m.qpic.cn/psc?/V12UXEll2JjLTU/S1G4*2hi*D5aPIJug2nMay*y27CPk3y5XXbsH0Eam1IKqfy.PeGkP11xpoFMPTOFrdP7V6H4Bus8i87O3gLaWAA8WIB6zdDyjW0xVV.enfY!/b&bo=9wG3AgAAAAARB3M!&rf=viewer_4&t=5)
+![image](http://i1.fuimg.com/717460/30e81e9b9f65283b.jpg)
 
 好像不太对是不是，这个图片只显示了一半对不对，它不是被压缩了啊很明显的是被截断了，然后高度是对的我们刚才说了高度不影响多高都可以它可以撑开，那这个问题是什么呢，我们看下`iphone6`这个模拟器上面宽度只有`375`（其实这里的375就是代表的逻辑分辨率pt，但是我们在网页上只能设置px，所以要把crab.jpg整张图显示出来就要设成width:375px，那如果设置为width:750px的话就刚好扩大了一倍），它只有`375`（这里要注意单位是pt）那怎么去显示`750px`呢，这个原因是什么呢？
 
-![image](http://m.qpic.cn/psc?/V12UXEll2JjLTU/S1G4*2hi*D5aPIJug2nMaz.wC4Gn*HlxW8jO.IcQvuVVVJMpMnuFrvfHgw4r7cH0*rO8yID2mTRceQLdK6cFmGdMY0YzOtL70M.J7y79m7M!/b&bo=EQFTAQAAAAARB3I!&rf=viewer_4&t=5)
+![image](http://i1.fuimg.com/717460/f99e9adfd09e90bd.jpg)
 
 那你现在是不是要跑去找你们的设计师啊，跟他说我们这个小程序啊只能显示`375px`的图片所以说你这个设计图不能用啊，那你这个设计师啊把这个设计图啊给修改成宽度是`375px`的效果：
 
-![image](http://m.qpic.cn/psc?/V12UXEll2JjLTU/S1G4*2hi*D5aPIJug2nMa6iJMYBQ*MG43rjRiyCSHfADxbwJavnMcaRxOXEh7FMt7N.TS8*oDioehcnkRGdmJghnyrQGkX4nTgktrS2IKa8!/b&bo=bgLOAQAAAAARB5M!&rf=viewer_4&t=5)
+![image](http://i1.fuimg.com/717460/182299d1d711321a.jpg)
 
 那我们看下这个`375px`宽的效果图啊，如果你这个`375px`你这个连字都看不清楚这个还能叫做一个效果图吗，好像是不可以的啊。
 
