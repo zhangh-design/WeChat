@@ -18,5 +18,12 @@ Page({
       posts_key: postsData.postList
     });
     console.log('onLoad');
+  },
+  /**
+   * @desc 点击跳转详情
+   * @param {*} event 
+   */
+  onPostTap: function (event) {
+    console.log('onPostTap');
   }
 })
