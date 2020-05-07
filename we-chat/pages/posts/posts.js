@@ -24,6 +24,10 @@ Page({
    * @param {*} event 
    */
   onPostTap: function (event) {
-    console.log('onPostTap');
+    var postId = event.currentTarget.dataset.postid;
+    // console.log('onPostTap', postId);
+    wx.navigateTo({
+      url: './post-detail/post-detail',
+    })
   }
 })
