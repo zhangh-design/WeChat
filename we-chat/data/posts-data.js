@@ -34,6 +34,7 @@ var posts_content = [{
     collection: 92,
     date: "Nov 12 2016",
     avatar: "/images/avatar/3.png",
+    headImgSrc: "/images/post/sls.jpg",
     author: "知乎",
     date: "Nov 12 2016",
     dateTime: "三天前",

@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    postData: null
+    collected: false,
+    currentPostId: null
   },
 
   /**
@@ -16,8 +17,29 @@ Page({
   onLoad: function (options) {
     var postId = options.id;
     var postData = postsData.postList[postId];
-    console.log(postData);
     this.setData(postData)
+    this.setData({
+      currentPostId: postId
+    })
+    /* var postsCollected = {
+      1: true,
+      2: true,
+      3: false
+    } */
+    var postsCollected = wx.getStorageSync('posts_collected');
+    if (postsCollected) {
+      var postCollected = postsCollected[postId];
+      if (postCollected) {
+        this.setData({
+          collected: postCollected
+        });
+      }
+    } else {
+      var postsCollected = {}
+      postsCollected[postId] = false;
+      wx.setStorageSync('posts_collected', postsCollected);
+      console.info(wx.getStorageSync('posts_collected'));
+    }
   },
 
   /**
@@ -35,37 +57,23 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面隐藏
+   * 收藏
    */
-  onHide: function () {
-
+  onCollectionTap: function (event) {
+    var postsCollected = wx.getStorageSync('posts_collected');
+    var postCollected = postsCollected[this.data.currentPostId];
+    postCollected = !postCollected; // 收藏变成未收藏的，未收藏变成收藏的
+    postsCollected[this.data.currentPostId] = postCollected;
+    // 更新文章是否收藏的缓存值
+    wx.setStorageSync('posts_collected', postsCollected);
+    // 更新数据绑定变量，从而实现切换图片
+    this.setData({
+      collected: postCollected
+    });
   },
 
   /**
-   * 生命周期函数--监听页面卸载
+   * 分享
    */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+  onShareTap: function (event) {}
 })
