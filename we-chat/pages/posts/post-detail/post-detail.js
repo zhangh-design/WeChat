@@ -38,7 +38,6 @@ Page({
       var postsCollected = {}
       postsCollected[postId] = false;
       wx.setStorageSync('posts_collected', postsCollected);
-      console.info(wx.getStorageSync('posts_collected'));
     }
   },
 
@@ -64,16 +63,45 @@ Page({
     var postCollected = postsCollected[this.data.currentPostId];
     postCollected = !postCollected; // 收藏变成未收藏的，未收藏变成收藏的
     postsCollected[this.data.currentPostId] = postCollected;
+
+    this.showToast(postsCollected, postCollected);
+  },
+
+  /**
+   * 分享
+   */
+  onShareTap: function (event) {},
+
+  showModal: function () {
+    wx.showModal({
+      title: '提示',
+      content: '是否收藏该文章',
+      showCancel: true,
+      cancelText: '不收藏',
+      cancelColor: '#333',
+      confirmText: '收藏',
+      confirmColor: '#405f80',
+      success(res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+
+  showToast: function (postsCollected, postCollected) {
     // 更新文章是否收藏的缓存值
     wx.setStorageSync('posts_collected', postsCollected);
     // 更新数据绑定变量，从而实现切换图片
     this.setData({
       collected: postCollected
     });
-  },
-
-  /**
-   * 分享
-   */
-  onShareTap: function (event) {}
+    wx.showToast({
+      title: postCollected ? '收藏成功' : '取消成功',
+      icon: 'success',
+      duration: 1500
+    })
+  }
 })
