@@ -3,6 +3,6 @@
 	<text class="user-name">Hello</text>
 	<view class="moto-container" bind:tap="onTap"> <!--catch:tap="onTap"-->
 		<!-- 1px = 1rpx = 0.5pt -->
-		<text class="moto">开启小程序之旅</text>
+		<text class="moto">进入小程序</text>
 	</view>
 </view>
