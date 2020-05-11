@@ -1,5 +1,6 @@
 // pages/posts/post-detail/post-detail.js
 var postsData = require('../../../data/posts-data.js');
+var app = getApp();
 
 Page({
 
@@ -19,7 +20,7 @@ Page({
     var that = this;
     var postId = options.id;
     var postData = postsData.postList[postId]; // 当前文章
-    this.setData(postData)
+    this.setData(postData);
     this.setData({
       currentPostId: postId
     })
@@ -41,14 +42,34 @@ Page({
       postsCollected[postId] = false;
       wx.setStorageSync('posts_collected', postsCollected);
     }
+    // 通过全局变量控制音乐播放
+    var globalData = app.globalData;
+    if (globalData.g_isPlayingMusic && globalData.g_currentMusicPostId === postData) {
+      this.setData({
+        isPlayingMusic: true
+      })
+    }
+    this.setMusicMonitor();
+  },
 
+  setMusicMonitor: function () {
+    var that = this;
     // 监听音乐播放
-    wx.onBackgroundAudioPlay(function(){
-      that.setData({isPlayingMusic: true});
-    });
+    wx.onBackgroundAudioPlay(function () {
+      that.setData({
+        isPlayingMusic: true
+      });
+      app.globalData.g_isPlayingMusic = true;
+      app.globalData.g_currentMusicPostId = that.data.currentPostId;
+    }),
+
     // 监听音乐暂停
-    wx.onBackgroundAudioPause(function(){
-      that.setData({isPlayingMusic: false});
+    wx.onBackgroundAudioPause(function () {
+      that.setData({
+        isPlayingMusic: false
+      });
+      app.globalData.isPlayingMusic = false;
+      app.globalData.g_currentMusicPostId = null;
     });
   },
 
@@ -105,7 +126,9 @@ Page({
     if (isPlayingMusic) {
       wx.pauseBackgroundAudio();
       // this.data.isPlayingMusic = false; 这样赋值界面上无法自动更新
-      this.setData({isPlayingMusic: false});
+      this.setData({
+        isPlayingMusic: false
+      });
     } else {
       wx.playBackgroundAudio({
         dataUrl: postData.music.url,
@@ -113,7 +136,9 @@ Page({
         coverImgUrl: postData.music.coverImg
       });
       // this.data.isPlayingMusic = true;
-      this.setData({isPlayingMusic: true});
+      this.setData({
+        isPlayingMusic: true
+      });
     }
   },
 
