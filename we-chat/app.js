@@ -1,7 +1,8 @@
 App({
   globalData: {
     g_isPlayingMusic: false, // 全局变量控制音乐播放状态
-    g_currentMusicPostId: null // 播放音乐的文章
+    g_currentMusicPostId: null, // 播放音乐的文章
+    doubanBase: 'http://t.yushu.im' // 豆瓣基础地址 https://api.douban.com
   },
   /**
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）

@@ -3,7 +3,8 @@ Page({
     /* wx.navigateTo({
       url: '../posts/posts',
     }) */
-    wx.redirectTo({
+    // wx.redirectTo
+    wx.switchTab({
       url: '../posts/posts',
       success: function(){
         console.log('welcome redirectTo success')

@@ -19,6 +19,7 @@ Page({
     });
     console.log('onLoad');
   },
+
   /**
    * @desc 点击跳转详情
    * @param {*} event 
@@ -27,7 +28,19 @@ Page({
     var postId = event.currentTarget.dataset.postid;
     // console.log('onPostTap', postId);
     wx.navigateTo({
-      url: './post-detail/post-detail?id='+postId,
+      url: './post-detail/post-detail?id=' + postId,
+    })
+  },
+
+  /**
+   * @desc 点击头部轮播跳转
+   */
+  onSwiperTap: function (event) {
+    // target 指的是当前点击的组件，currentTarget 指的是事件捕获的组件
+    // target这里指的是image，而currentTarget 指的是Swiper组件
+    var postId = event.target.dataset.postid;
+    wx.navigateTo({
+      url: './post-detail/post-detail?id=' + postId,
     })
   }
 })
