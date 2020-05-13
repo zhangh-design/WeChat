@@ -12,11 +12,15 @@
     "list": [
       {
         "pagePath": "pages/posts/posts",
-        "text": "首页"
+        "text": "首页",
+        "iconPath": "images/tab/yuedu.png",
+        "selectedIconPath": "images/tab/yuedu_hl.png"
       },
       {
         "pagePath": "pages/movies/movies",
-        "text": "日志"
+        "text": "日志",
+        "iconPath": "images/tab/dianying.png",
+        "selectedIconPath": "images/tab/dianying_hl.png"
       }
     ]
   },
