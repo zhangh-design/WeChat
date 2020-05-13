@@ -9,6 +9,7 @@
     "navigationBarBackgroundColor": "#405f80"
   },
   "tabBar": {
+    "position": "bottom",
     "list": [
       {
         "pagePath": "pages/posts/posts",
