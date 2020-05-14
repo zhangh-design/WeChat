@@ -12,13 +12,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.request({
+      url: 'http://t.yushu.im/v2/movie/top250?start=0&count=3',
+      method: 'GET',
+      header: {
+        'Content-type': 'application/json'
+      },
+      success: function (res) {
+        console.log(res)
+      },
+      fail: function () {
+        console.info('failed')
+      },
+      complete: function () {
 
+      }
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function (event) {
 
   },
 
