@@ -1,4 +1,5 @@
 // pages/movies/movies.js
+var util = require('../../utils/util.js');
 var app = getApp();
 Page({
 
@@ -6,7 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    movies: []
+    inTheaters: {},
+    comingSoon: {},
+    top250: {}
   },
 
   /**
@@ -15,19 +18,26 @@ Page({
   onLoad: function (options) {
     var inTheatersUrl = app.globalData.doubanBase +
       "/v2/movie/in_theaters" + "?start=0&count=3";
-    this.getMovieListData(inTheatersUrl);
+    var comingSoonUrl = app.globalData.doubanBase +
+      "/v2/movie/coming_soon" + "?start=0&count=3";
+    var top250Url = app.globalData.doubanBase +
+      "/v2/movie/top250" + "?start=0&count=3";
+
+    this.getMovieListData(inTheatersUrl, 'inTheaters', "正在热映");
+    this.getMovieListData(comingSoonUrl, 'comingSoon', "即将上映");
+    this.getMovieListData(top250Url, 'top250', "豆瓣Top250");
   },
-  getMovieListData: function (url) {
+  getMovieListData: function (url, settedKey, categoryTitle) {
     var that = this;
     wx.request({
-      url: 'http://t.yushu.im/v2/movie/top250?start=0&count=3',
+      url: url,
       method: 'GET',
       header: {
         'Content-type': 'application/json'
       },
       success: function (res) {
         // console.log(res)
-        that.processDoubanData(res.data)
+        that.processDoubanData(res.data, settedKey, categoryTitle)
       },
       fail: function () {
         console.info('failed')
@@ -37,7 +47,7 @@ Page({
       }
     })
   },
-  processDoubanData: function (moviesDouban) {
+  processDoubanData: function (moviesDouban, settedKey, categoryTitle) {
     var movies = [];
     for (var idx in moviesDouban.subjects) {
       var subject = moviesDouban.subjects[idx];
@@ -46,6 +56,7 @@ Page({
         title = title.substring(0, 6) + "...";
       }
       var temp = {
+        stars: util.convertToStarsArray(subject.rating.stars),
         title: title,
         average: subject.rating.average,
         coverageUrl: subject.images.large,
@@ -53,9 +64,17 @@ Page({
       }
       movies.push(temp)
     }
-    console.info(movies)
-    this.setData({
+    var readyData = {};
+    readyData[settedKey] = {
+      movies: movies,
+      categoryTitle: categoryTitle
+    };
+    this.setData(readyData);
+    /* this.setData({
       movies: movies
-    })
+    }) */
+  },
+  errorFunction: function (e) {
+
   }
 })
