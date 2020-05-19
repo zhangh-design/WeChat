@@ -13,3 +13,8 @@
 ![image](./5.jpg)
 
 ![image](./6.jpg)
+
+
+more-movie.json 设置 "backgroundColor": "pink" 到底设置的是窗口的哪里
+
+![image](./7.jpg)

@@ -44,11 +44,30 @@ Page({
     })
     util.http(dataUrl, this.processDoubanData);
   },
-
-  onScrollLower: function (event) {
+  // 上滑加载更多
+  /* onScrollLower: function (event) {
     var nextUrl = this.data.requestUrl + "?start=" + this.data.totalCount + "&count=20";
     util.http(nextUrl, this.processDoubanData);
     wx.showNavigationBarLoading()
+  }, */
+
+  onReachBottom: function (event) {
+    var nextUrl = this.data.requestUrl +
+      "?start=" + this.data.totalCount + "&count=20";
+    util.http(nextUrl, this.processDoubanData)
+    wx.showNavigationBarLoading()
+  },
+
+  // 下拉刷新小程序会自动调用这个方法
+  onPullDownRefresh: function (event) {
+    var refreshUrl = this.data.requestUrl +
+      "?star=0&count=20";
+    this.setData({movies: {}, isEmpty: true, totalCount: 0});
+    /* this.data.movies = {};
+    this.data.isEmpty = true;
+    this.data.totalCount = 0; */
+    util.http(refreshUrl, this.processDoubanData);
+    wx.showNavigationBarLoading();
   },
 
   processDoubanData: function (moviesDouban) {
@@ -74,7 +93,9 @@ Page({
       totalMovies = this.data.movies.concat(movies);
     } else {
       totalMovies = movies;
-      this.setData({isEmpty: false})
+      this.setData({
+        isEmpty: false
+      })
     }
     this.setData({
       movies: totalMovies
@@ -84,5 +105,6 @@ Page({
       totalCount: nextCount
     });
     wx.hideNavigationBarLoading();
+    wx.stopPullDownRefresh(); // 关闭下拉刷新
   }
 })

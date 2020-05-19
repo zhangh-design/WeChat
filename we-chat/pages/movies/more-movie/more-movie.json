@@ -1,3 +1,5 @@
 {
+  "enablePullDownRefresh": true,
+  "backgroundColor": "pink",
   "usingComponents": {}
 }

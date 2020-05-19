@@ -1,10 +1,13 @@
 <import src="../movie/movie-template.wxml" />
 <template name="movieGridTemplate">
-	<scroll-view scroll-y="true" scroll-x="false" bindscrolltolower="onScrollLower" class="grid-container">
+	<!-- <scroll-view scroll-y="true" scroll-x="false" bindscrolltolower="onScrollLower" class="grid-container"> -->
+	<!--onPullDownRefresh下拉刷新功能和 scroll-view 冲突，改用 view 然后通过onReachBottom事件来监听页面上滑到底 -->
+	<view class="grid-container">
 		<block wx:for="{{movies}}" wx:for-item="movie">
 			<view class="single-view-container">
 				<template is="movieTemplate" data="{{...movie}}" />
 			</view>
 		</block>
-	</scroll-view>
+	</view>
+	<!-- </scroll-view> -->
 </template>
