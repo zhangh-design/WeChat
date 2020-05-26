@@ -9,7 +9,10 @@ Page({
   data: {
     inTheaters: {},
     comingSoon: {},
-    top250: {}
+    top250: {},
+    searchResult: {},
+    containerShow: true,
+    searchPanelShow: false
   },
 
   /**
@@ -32,7 +35,7 @@ Page({
     var category = event.currentTarget.dataset.category;
     console.info(category);
     wx.navigateTo({
-      url: './more-movie/more-movie?category='+category,
+      url: './more-movie/more-movie?category=' + category,
     })
   },
   getMovieListData: function (url, settedKey, categoryTitle) {
@@ -44,7 +47,7 @@ Page({
         'Content-type': 'application/json'
       },
       success: function (res) {
-        // console.log(res)
+        console.log(res)
         that.processDoubanData(res.data, settedKey, categoryTitle)
       },
       fail: function () {
@@ -54,6 +57,26 @@ Page({
         console.info('complete')
       }
     })
+  },
+  onCancelImgTap: function (event) {
+    this.setData({
+      containerShow: true,
+      searchPanelShow: false,
+      searchResult: {} // 清空上一次的搜索结果
+    })
+  },
+  onBindFocus: function (event) {
+    console.info('onBindFocus')
+    this.setData({
+      containerShow: false,
+      searchPanelShow: true
+    })
+  },
+  onBindConfirm: function (event) {
+    console.info('onBindConfirm')
+    var text = event.detail.value; // 获取输入框输入的内容
+    var searchUrl = app.globalData.doubanBase + "/v2/movie/search?q=" + text;
+    this.getMovieListData(searchUrl, "searchResult", "");
   },
   processDoubanData: function (moviesDouban, settedKey, categoryTitle) {
     var movies = [];
